@@ -1,45 +1,46 @@
 <template>
   <div class="bar">
-    <el-tooltip content="清除 (Cmd + D)" placement="bottom">
-      <el-button name="delete" class="item-space" size="small" @click="handleClick"> delete </el-button>
+    <el-tooltip content="清屏 (Cmd + D)" placement="bottom">
+      <el-button name="clear" class="item-space" size="small" @click="handleClick">清屏</el-button>
+    </el-tooltip>
+    <el-tooltip content="删除" placement="bottom">
+      <el-button name="delete" class="item-space" size="small" @click="handleClick">删除</el-button>
     </el-tooltip>
 
     <el-tooltip content="撤销 (Cmd + Z)" placement="bottom">
-      <el-button :disabled="!canUndo" name="undo" class="item-space" size="small" @click="handleClick"> undo
-      </el-button>
+      <el-button :disabled="!canUndo" name="undo" class="item-space" size="small" @click="handleClick">撤销</el-button>
     </el-tooltip>
 
-    <el-tooltip content="Redo (Cmd + Shift + Z)" placement="bottom">
-      <el-button :disabled="!canRedo" name="redo" class="item-space" size="small" @click="handleClick"> redo
-      </el-button>
+    <el-tooltip content="重做 (Cmd + Shift + Z)" placement="bottom">
+      <el-button :disabled="!canRedo" name="redo" class="item-space" size="small" @click="handleClick">重做</el-button>
     </el-tooltip>
 
     <el-tooltip content="复制 (Cmd + Shift + Z)" placement="bottom">
-      <el-button name="copy" class="item-space" size="small" @click="handleClick"> copy </el-button>
+      <el-button name="copy" class="item-space" size="small" @click="handleClick">复制 </el-button>
     </el-tooltip>
 
     <el-tooltip content="剪切 (Cmd + X)" placement="bottom">
-      <el-button name="cut" class="item-space" size="small" @click="handleClick"> cut </el-button>
+      <el-button name="cut" class="item-space" size="small" @click="handleClick">剪切</el-button>
     </el-tooltip>
 
     <el-tooltip content="粘贴 (Cmd + V)" placement="bottom">
-      <el-button name="paste" class="item-space" size="small" @click="handleClick"> paste </el-button>
+      <el-button name="paste" class="item-space" size="small" @click="handleClick">粘贴</el-button>
     </el-tooltip>
 
     <el-tooltip content="保存PNG (Cmd + S)" placement="bottom">
-      <el-button name="savePNG" class="item-space" size="small" @click="handleClick"> savePNG </el-button>
+      <el-button name="savePNG" class="item-space" size="small" @click="handleClick">保存PNG</el-button>
     </el-tooltip>
 
     <el-tooltip content="保存SVG (Cmd + S)" placement="bottom">
-      <el-button name="saveSVG" class="item-space" size="small" @click="handleClick"> saveSVG </el-button>
+      <el-button name="saveSVG" class="item-space" size="small" @click="handleClick">保存SVG</el-button>
     </el-tooltip>
 
     <el-tooltip content="打印 (Cmd + P)" placement="bottom">
-      <el-button name="print" class="item-space" size="small" @click="handleClick"> print </el-button>
+      <el-button name="print" class="item-space" size="small" @click="handleClick">打印</el-button>
     </el-tooltip>
 
     <el-tooltip content="导出 (Cmd + P)" placement="bottom">
-      <el-button name="toJSON" class="item-space" size="small" @click="handleClick"> toJSON </el-button>
+      <el-button name="toJSON" class="item-space" size="small" @click="handleClick">导出</el-button>
     </el-tooltip>
   </div>
 </template>
@@ -48,51 +49,51 @@
 import FlowGraph from '../../graph'
 import { DataUri } from '@antv/x6'
 
-const { graph } = FlowGraph
 export default {
   name: 'ToolBar',
   components: {},
   data() {
     return {
-      canUndo: graph?.history.canUndo(),
-      canRedo: graph?.history.canRedo()
+      canUndo: '',
+      canRedo: ''
     }
   },
   mounted() {
     this.$nextTick(() => {
+      const { graph } = FlowGraph
       graph?.history.on('change', () => {
         this.canUndo = graph?.history.canUndo()
         this.canRedo = graph?.history.canRedo()
       })
-      graph?.bindKey('ctrl+z', () => {
+      graph?.bindKey(['command+z', 'ctrl+z'], () => {
         if (graph?.history.canUndo()) {
           graph?.history.undo()
         }
         return false
       })
-      graph?.bindKey('ctrl+shift+z', () => {
+      graph?.bindKey(['command+shift+z', 'ctrl+shift+z'], () => {
         if (graph?.history.canRedo()) {
           graph?.history.redo()
         }
         return false
       })
-      graph?.bindKey('ctrl+d', () => {
+      graph?.bindKey(['command+d', 'ctrl+d'], () => {
         graph.clearCells()
         return false
       })
-      graph?.bindKey('ctrl+s', () => {
+      graph?.bindKey(['command+s', 'ctrl+s'], () => {
         graph.toPNG((datauri) => {
           DataUri.downloadDataUri(datauri, 'chart.png')
         })
         return false
       })
-      graph?.bindKey('ctrl+p', () => {
+      graph?.bindKey(['command+p', 'ctrl+p'], () => {
         graph.printPreview()
         return false
       })
-      graph?.bindKey('ctrl+c', this.copy)
-      graph?.bindKey('ctrl+v', this.paste)
-      graph?.bindKey('ctrl+x', this.cut)
+      graph?.bindKey(['command+c', 'ctrl+c'], this.copy)
+      graph?.bindKey(['command+v', 'ctrl+v'], this.paste)
+      graph?.bindKey(['command+x', 'ctrl+x'], this.cut)
     })
   },
   methods: {
@@ -131,8 +132,11 @@ export default {
         case 'redo':
           graph.history.redo()
           break
-        case 'delete':
+        case 'clear':
           graph.clearCells()
+          break
+        case 'delete':
+          graph.removeCells(graph.getSelectedCells())
           break
         case 'savePNG':
           graph.toPNG(

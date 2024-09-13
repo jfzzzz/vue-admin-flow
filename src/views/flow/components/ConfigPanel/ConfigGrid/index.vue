@@ -1,12 +1,12 @@
 <template>
-  <el-tabs default-active-key="1">
-    <el-tab-pane key="1" tab="网格">
+  <el-tabs v-model="activeName">
+    <el-tab-pane name="1" label="网格">
       <el-row align="middle">
         <el-col :span="10">Grid Type</el-col>
         <el-col :span="12">
           <el-select
+            v-model="globalGridAttr.type"
             style="width: 100%"
-            :value="globalGridAttr.type"
             @change="
               (val) => {
                 globalGridAttr.type = val;
@@ -24,10 +24,10 @@
         <el-col :span="10">Grid Size</el-col>
         <el-col :span="10">
           <el-slider
+            v-model="globalGridAttr.size"
             :min="1"
             :max="20"
             :step="1"
-            :value="globalGridAttr.size"
             @change="
               (val) => {
                 globalGridAttr.size = val;
@@ -43,13 +43,11 @@
         <el-row align="middle">
           <el-col :span="10">Primary Color</el-col>
           <el-col :span="12">
-            <el-input
-              type="color"
-              :value="globalGridAttr.color"
-              style="width: 100%"
+            <el-color-picker
+              v-model="globalGridAttr.color"
               @change="
-                (e) => {
-                  globalGridAttr.color = e.target.value;
+                (val) => {
+                  globalGridAttr.color = val;
                 }
               "
             />
@@ -59,10 +57,10 @@
           <el-col :span="10">Primary Thickness</el-col>
           <el-col :span="10">
             <el-slider
+              v-model="globalGridAttr.thickness"
               :min="0.5"
               :max="10"
               :step="0.5"
-              :value="globalGridAttr.thickness"
               @change="
                 (val) => {
                   globalGridAttr.thickness = val;
@@ -77,13 +75,11 @@
         <el-row align="middle">
           <el-col :span="10">Secondary Color</el-col>
           <el-col :span="12">
-            <el-input
-              type="color"
-              :value="globalGridAttr.colorSecond"
-              style="width: 100%"
+            <el-color-picker
+              v-model="globalGridAttr.colorSecond"
               @change="
-                (e) => {
-                  globalGridAttr.colorSecond = e.target.value;
+                (val) => {
+                  globalGridAttr.colorSecond = val;
                 }
               "
             />
@@ -93,10 +89,10 @@
           <el-col :span="10">Secondary Thickness</el-col>
           <el-col :span="10">
             <el-slider
+              v-model="globalGridAttr.thicknessSecond"
               :min="0.5"
               :max="10"
               :step="0.5"
-              :value="globalGridAttr.thicknessSecond"
               @change="
                 (val) => {
                   globalGridAttr.thicknessSecond = val;
@@ -112,10 +108,10 @@
           <el-col :span="10">Scale Factor</el-col>
           <el-col :span="10">
             <el-slider
+              v-model="globalGridAttr.factor"
               :min="1"
               :max="10"
               :step="1"
-              :value="globalGridAttr.factor"
               @change="
                 (val) => {
                   globalGridAttr.factor = val;
@@ -132,13 +128,11 @@
         <el-row align="middle">
           <el-col :span="10">Grid Color</el-col>
           <el-col :span="12">
-            <el-input
-              type="color"
-              :value="globalGridAttr.color"
-              style="width: 100%"
+            <el-color-picker
+              v-model="globalGridAttr.color"
               @change="
-                (e) => {
-                  globalGridAttr.color = e.target.value;
+                (val) => {
+                  globalGridAttr.color = val;
                 }
               "
             />
@@ -148,10 +142,10 @@
           <el-col :span="10">Thickness</el-col>
           <el-col :span="10">
             <el-slider
+              v-model="globalGridAttr.thickness"
               :min="0.5"
               :max="10"
               :step="0.5"
-              :value="globalGridAttr.thickness"
               @change="
                 (val) => {
                   globalGridAttr.thickness = val;
@@ -166,17 +160,15 @@
       </div>
     </el-tab-pane>
 
-    <el-tab-pane key="2" tab="背景">
+    <el-tab-pane name="2" label="背景">
       <el-row align="middle">
         <el-col :span="6">Color</el-col>
         <el-col :span="14">
-          <el-input
-            type="color"
-            :value="globalGridAttr.bgColor"
-            style="width: 100%"
+          <el-color-picker
+            v-model="globalGridAttr.bgColor"
             @change="
-              (e) => {
-                globalGridAttr.bgColor = e.target.value;
+              (val) => {
+                globalGridAttr.bgColor = val;
               }
             "
           />
@@ -185,10 +177,10 @@
       <el-row align="middle">
         <el-col :span="14" :offset="6">
           <el-checkbox
-            :checked="globalGridAttr.showImage"
+            v-model="globalGridAttr.showImage"
             @change="
               (e) => {
-                globalGridAttr.showImage = e.target.checked;
+                globalGridAttr.showImage = e;
               }
             "
           >
@@ -201,8 +193,8 @@
           <el-col :span="6">Repeat</el-col>
           <el-col :span="14">
             <el-select
+              v-model="globalGridAttr.repeat"
               style="width: 100%"
-              :value="globalGridAttr.repeat"
               @change="
                 (val) => {
                   globalGridAttr.repeat = val;
@@ -227,10 +219,10 @@
             <el-col :span="16" :offset="6" style="font-size: 12px"> Watermark Angle </el-col>
             <el-col :span="14" :offset="6">
               <el-slider
+                v-model="globalGridAttr.angle"
                 :min="0"
                 :max="360"
                 :step="1"
-                :value="globalGridAttr.angle"
                 @change="
                   (val) => {
                     globalGridAttr.angle = val;
@@ -248,8 +240,8 @@
           <el-col :span="6">Position</el-col>
           <el-col :span="14">
             <el-select
+              v-model="globalGridAttr.position"
               style="width: 100%"
-              :value="globalGridAttr.position"
               @change="
                 (val) => {
                   globalGridAttr.position = val;
@@ -270,8 +262,8 @@
           <el-col :span="6">Size</el-col>
           <el-col :span="14">
             <el-select
+              v-model="globalGridAttr.bgSize"
               style="width: 100%"
-              :value="globalGridAttr.bgSize"
               @change="
                 (val) => {
                   globalGridAttr.bgSize = val;
@@ -291,10 +283,10 @@
           <el-col :span="6">Opacity</el-col>
           <el-col :span="12">
             <el-slider
+              v-model="globalGridAttr.opacity"
               :min="0.05"
               :max="1"
               :step="0.05"
-              :value="globalGridAttr.opacity"
               @change="
                 (val) => {
                   globalGridAttr.opacity = val;
@@ -343,7 +335,8 @@ export default {
   data() {
     return {
       GRID_TYPE: GRID_TYPE_ENUM,
-      REPEAT_TYPE: REPEAT_TYPE_ENUM
+      REPEAT_TYPE: REPEAT_TYPE_ENUM,
+      activeName: '1'
     }
   },
   watch: {

@@ -1,8 +1,5 @@
 <template>
   <div class="config">
-    <div>
-      {{ id }}
-    </div>
     <config-grid v-show="type === 'grid'" />
     <config-node v-show="type === 'node'" />
     <config-edge v-show="type === 'edge'" />

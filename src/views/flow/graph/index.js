@@ -6,9 +6,9 @@ export default class FlowGraph {
   static init() {
     this.graph = new Graph({
       container: document.getElementById('container'),
-      width: 1000,
-      height: 800,
-      grid: {
+      // width: 1000, //画布宽度，默认使用容器宽度。
+      // height: 800, // 	画布高度，默认使用容器高度。
+      grid: { // 网格，默认使用 10px 的网格，但不绘制网格背景。
         size: 10,
         visible: true,
         type: 'doubleMesh',
@@ -25,27 +25,27 @@ export default class FlowGraph {
         ]
       },
 
-      scroller: {
+      scroller: { // 滚动画布，默认禁用。
         enabled: true,
         pageVisible: true,
         pageBreak: true,
         pannable: false
       },
-      mousewheel: {
+      mousewheel: { // 鼠标滚轮缩放，默认禁用。
         enabled: true,
         modifiers: ['ctrl', 'meta'],
         minScale: 0.5,
         maxScale: 2
       },
 
-      selecting: {
+      selecting: { // 点选/框选，默认禁用。
         enabled: true,
         multiple: true,
         rubberband: true,
         movable: true,
         showNodeSelectionBox: true
       },
-      connecting: {
+      connecting: { // 连线选项。
         anchor: 'center',
         connectionPoint: 'anchor',
         allowBlank: false,
@@ -86,7 +86,7 @@ export default class FlowGraph {
           return true
         }
       },
-      highlighting: {
+      highlighting: { // 	高亮选项。
         magnetAvailable: {
           name: 'stroke',
           args: {
@@ -98,15 +98,15 @@ export default class FlowGraph {
           }
         }
       },
-      snapline: true,
-      history: true,
-      clipboard: {
+      snapline: true, // 对齐线，默认禁用。
+      history: true, // 撤销/重做，默认禁用。
+      clipboard: { // 剪切板，默认禁用。
         enabled: true
       },
-      keyboard: {
+      keyboard: { // 键盘快捷键，默认禁用。
         enabled: true
       },
-      embedding: {
+      embedding: { // 嵌套节点，默认禁用。
         enabled: true,
         findParent({ node }) {
           const bbox = node.getBBox()

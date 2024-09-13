@@ -1,60 +1,40 @@
 <template>
-  <el-tabs v-model="activeName">
-    <el-tab-pane name="1" label="节点">
-      <!-- <el-row align="middle">
+  <el-form :model="form" label-width="80px">
+    <el-tabs v-model="activeName">
+
+      <el-tab-pane name="1" label="节点">
+        <!-- <el-row align="middle">
         <el-col :span="8">id</el-col>
         <el-col :span="14">
           <span>{{ id.value }}</span>
         </el-col>
       </el-row> -->
-      <el-row align="middle">
-        <el-col :span="8">Border Color</el-col>
-        <el-col :span="14">
-          <el-color-picker v-model="globalGridAttr.nodeStroke" @change="onStrokeChange" />
-        </el-col>
-      </el-row>
-      <el-row align="middle">
-        <el-col :span="8">Border Width</el-col>
-        <el-col :span="12">
-          <el-slider v-model="globalGridAttr.nodeStrokeWidth" :min="1" :max="5" :step="1" @change="onStrokeWidthChange" />
-        </el-col>
-        <el-col :span="2">
-          <div class="result">{{ globalGridAttr.nodeStrokeWidth }}</div>
-        </el-col>
-      </el-row>
-      <el-row align="middle">
-        <el-col :span="8">Fill</el-col>
-        <el-col :span="14">
-          <el-color-picker v-model="globalGridAttr.nodeFill" @change="onFillChange" />
-        </el-col>
-      </el-row>
-    </el-tab-pane>
-    <el-tab-pane name="2" label="文本">
-      <el-row align="middle">
-        <el-col :span="8">Font Size</el-col>
-        <el-col :span="12">
-          <el-slider v-model="globalGridAttr.nodeFontSize" :min="8" :max="16" :step="1" @change="onFontSizeChange" />
-        </el-col>
-        <el-col :span="2">
-          <div class="result">{{ globalGridAttr.nodeFontSize }}</div>
-        </el-col>
-      </el-row>
-      <el-row align="middle">
-        <el-col :span="8">Font Color</el-col>
-        <el-col :span="14">
-          <el-color-picker v-model="globalGridAttr.nodeColor" @change="onColorChange" />
-        </el-col>
-      </el-row>
-    </el-tab-pane>
-    <el-tab-pane name="3" label="属性">
-      <el-row align="middle">
-        <el-col :span="8">Assign Users</el-col>
-        <el-col :span="14">
-          <el-input v-model="globalGridAttr.nodeUsers" style="width: 100%" @change="onUsersChange" />
-        </el-col>
-      </el-row>
-    </el-tab-pane>
-  </el-tabs>
+        <el-form-item label="边框颜色">
+          <el-color-picker v-model="globalGridAttr.nodeStroke" size="medium" @change="onStrokeChange" />
+        </el-form-item>
+        <el-form-item label="边框宽度">
+          <el-slider v-model="globalGridAttr.nodeStrokeWidth" style="width: 90%;" :min="1" :max="5" :step="1" @change="onStrokeWidthChange" />
+        </el-form-item>
+        <el-form-item label="填充颜色">
+          <el-color-picker v-model="globalGridAttr.nodeFill" size="medium" @change="onFillChange" />
+        </el-form-item>
+      </el-tab-pane>
+      <el-tab-pane name="2" label="文本">
+        <el-form-item label="文本大小">
+          <el-slider v-model="globalGridAttr.nodeFontSize" style="width: 90%;" :min="8" :max="16" :step="1" @change="onFontSizeChange" />
+        </el-form-item>
+        <el-form-item label="文本颜色">
+          <el-color-picker v-model="globalGridAttr.nodeColor" size="medium" @change="onColorChange" />
+        </el-form-item>
+      </el-tab-pane>
+      <el-tab-pane name="3" label="属性">
+        <el-form-item label="用户">
+          <el-input v-model="globalGridAttr.nodeUsers" style="width: 90%;" @change="onUsersChange" />
+        </el-form-item>
+      </el-tab-pane>
+
+    </el-tabs>
+  </el-form>
 </template>
 
 <script>
@@ -67,6 +47,7 @@ export default {
   ],
   data() {
     return {
+      form: {},
       activeName: '1',
       curCel: ''
     }
