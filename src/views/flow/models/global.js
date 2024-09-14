@@ -26,5 +26,11 @@ export const globalGridAttr = reactive({
   nodeFill: '#ffffff',
   nodeFontSize: 12,
   nodeColor: '#080808',
-  nodeUsers: ''
+  nodeUsers: '',
+
+  // userdata
+  title: '',
+  text: '',
+  text2: '',
+  text3: ''
 })

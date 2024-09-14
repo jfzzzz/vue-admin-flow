@@ -1176,6 +1176,102 @@ const graphData = {
       },
       id: '4197e369-2948-4209-8e13-0dd6dedd07b4',
       zIndex: 22
+    },
+    {
+      position: {
+        x: 660,
+        y: 508
+      },
+      size: {
+        width: 200,
+        height: 108
+      },
+      visible: true,
+      shape: 'flow-chart-combination-rect',
+      ports: {
+        groups: {
+          top: {
+            position: 'top',
+            attrs: {
+              circle: {
+                r: 3,
+                magnet: true,
+                stroke: '#5F95FF',
+                strokeWidth: 1,
+                fill: '#fff',
+                style: {
+                  visibility: 'hidden'
+                }
+              }
+            }
+          },
+          right: {
+            position: 'right',
+            attrs: {
+              circle: {
+                r: 3,
+                magnet: true,
+                stroke: '#5F95FF',
+                strokeWidth: 1,
+                fill: '#fff',
+                style: {
+                  visibility: 'hidden'
+                }
+              }
+            }
+          },
+          bottom: {
+            position: 'bottom',
+            attrs: {
+              circle: {
+                r: 3,
+                magnet: true,
+                stroke: '#5F95FF',
+                strokeWidth: 1,
+                fill: '#fff',
+                style: {
+                  visibility: 'hidden'
+                }
+              }
+            }
+          },
+          left: {
+            position: 'left',
+            attrs: {
+              circle: {
+                r: 3,
+                magnet: true,
+                stroke: '#5F95FF',
+                strokeWidth: 1,
+                fill: '#fff',
+                style: {
+                  visibility: 'hidden'
+                }
+              }
+            }
+          }
+        },
+        items: [
+          {
+            group: 'top',
+            id: '08037113-a25d-44bb-bd07-baca5c91e5d3'
+          },
+          {
+            group: 'right',
+            id: 'a19d14ef-2116-4eba-b0ad-2376e7520967'
+          },
+          {
+            group: 'bottom',
+            id: '3ee9ebb5-aa40-4e39-bbff-b80decd2133b'
+          },
+          {
+            group: 'left',
+            id: '1feaa3ce-e88e-4284-b396-c4f72afcadef'
+          }
+        ]
+      },
+      id: 'f373bb90-16d0-4ba4-ba8d-44457ca9eca4',
+      zIndex: 23
     }
   ]
 }

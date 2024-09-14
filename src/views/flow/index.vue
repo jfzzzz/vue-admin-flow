@@ -70,7 +70,6 @@ export default {
           window.removeEventListener('resize', resizeFn)
         }
       })
-      console.log(graph)
     }
   }
 

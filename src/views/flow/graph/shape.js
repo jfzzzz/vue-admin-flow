@@ -461,6 +461,172 @@ export const FlowChartAnimateText = Graph.registerNode(
   }
 )
 
+export const FlowChartCombinationRect = Graph.registerNode('flow-chart-combination-rect', {
+  inherit: 'rect',
+  width: 200,
+  height: 108,
+  attrs: {
+    body: {
+      stroke: '#5F95FF',
+      strokeWidth: 1,
+      fill: 'rgba(95,149,255,0.05)'
+    },
+    head: {
+      refWidth: '100%',
+      stroke: 'transparent',
+      height: 28,
+      fill: 'rgb(95,149,255)'
+    },
+    // image: {
+    //   'xlink:href':
+    //     'https://gw.alipayobjects.com/zos/antfincdn/FLrTNDvlna/antv.png',
+    //   height: 16,
+    //   x: 6,
+    //   y: 6
+    // },
+    title: {
+      text: 'Node',
+      refX: 100,
+      refY: 9,
+      fill: '#ffffff',
+      fontSize: 12,
+      'text-anchor': 'middle'
+    },
+    text: {
+      text: 'this is content text',
+      refX: 100,
+      refY: 45,
+      fontSize: 12,
+      fill: 'rgba(0,0,0,0.6)',
+      'text-anchor': 'middle'
+    },
+    text2: {
+      text: 'this is content text2',
+      refX: 100,
+      refY: 59,
+      fontSize: 12,
+      fill: 'rgba(0,0,0,0.6)',
+      'text-anchor': 'middle'
+    },
+    text3: {
+      text: 'this is content text3',
+      refX: 100,
+      refY: 79,
+      fontSize: 12,
+      fill: 'rgba(0,0,0,0.6)',
+      'text-anchor': 'middle'
+    }
+  },
+  markup: [
+    {
+      tagName: 'rect',
+      selector: 'body'
+    },
+    {
+      tagName: 'rect',
+      selector: 'head'
+    },
+    // {
+    //   tagName: 'image',
+    //   selector: 'image'
+    // },
+    {
+      tagName: 'text',
+      selector: 'title'
+    },
+    {
+      tagName: 'text',
+      selector: 'text'
+    },
+    {
+      tagName: 'text',
+      selector: 'text2'
+    },
+    {
+      tagName: 'text',
+      selector: 'text3'
+    }
+  ],
+  ports: {
+    groups: {
+      top: {
+        position: 'top',
+        attrs: {
+          circle: {
+            r: 3,
+            magnet: true,
+            stroke: '#5F95FF',
+            strokeWidth: 1,
+            fill: '#fff',
+            style: {
+              visibility: 'hidden'
+            }
+          }
+        }
+      },
+      right: {
+        position: 'right',
+        attrs: {
+          circle: {
+            r: 3,
+            magnet: true,
+            stroke: '#5F95FF',
+            strokeWidth: 1,
+            fill: '#fff',
+            style: {
+              visibility: 'hidden'
+            }
+          }
+        }
+      },
+      bottom: {
+        position: 'bottom',
+        attrs: {
+          circle: {
+            r: 3,
+            magnet: true,
+            stroke: '#5F95FF',
+            strokeWidth: 1,
+            fill: '#fff',
+            style: {
+              visibility: 'hidden'
+            }
+          }
+        }
+      },
+      left: {
+        position: 'left',
+        attrs: {
+          circle: {
+            r: 3,
+            magnet: true,
+            stroke: '#5F95FF',
+            strokeWidth: 1,
+            fill: '#fff',
+            style: {
+              visibility: 'hidden'
+            }
+          }
+        }
+      }
+    },
+    items: [
+      {
+        group: 'top'
+      },
+      {
+        group: 'right'
+      },
+      {
+        group: 'bottom'
+      },
+      {
+        group: 'left'
+      }
+    ]
+  }
+})
+
 export class NodeGroup extends Node {
   collapsed = true
 

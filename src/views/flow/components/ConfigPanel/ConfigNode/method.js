@@ -9,12 +9,17 @@ export function nodeOpt(id, globalGridAttr) {
       return
     }
     curCel = cell
+    console.log(curCel)
     globalGridAttr.nodeStroke = cell.attr('body/stroke')
     globalGridAttr.nodeStrokeWidth = cell.attr('body/strokeWidth')
     globalGridAttr.nodeFill = cell.attr('body/fill')
     globalGridAttr.nodeFontSize = cell.attr('text/fontSize')
     globalGridAttr.nodeColor = cell.attr('text/fill')
     globalGridAttr.nodeUsers = cell.attr('approve/users')
+    globalGridAttr.title = cell.attr('title/text')
+    globalGridAttr.text = cell.attr('text/text')
+    globalGridAttr.text2 = cell.attr('text2/text')
+    globalGridAttr.text3 = cell.attr('text3/text')
   }
   return curCel
 }

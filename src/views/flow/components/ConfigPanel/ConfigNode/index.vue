@@ -1,14 +1,7 @@
 <template>
   <el-form :model="form" label-width="80px">
     <el-tabs v-model="activeName">
-
       <el-tab-pane name="1" label="节点">
-        <!-- <el-row align="middle">
-        <el-col :span="8">id</el-col>
-        <el-col :span="14">
-          <span>{{ id.value }}</span>
-        </el-col>
-      </el-row> -->
         <el-form-item label="边框颜色">
           <el-color-picker v-model="globalGridAttr.nodeStroke" size="medium" @change="onStrokeChange" />
         </el-form-item>
@@ -17,6 +10,18 @@
         </el-form-item>
         <el-form-item label="填充颜色">
           <el-color-picker v-model="globalGridAttr.nodeFill" size="medium" @change="onFillChange" />
+        </el-form-item>
+        <el-form-item v-if="globalGridAttr.title" style="width: 90%;" label="title">
+          <el-input v-model="globalGridAttr.title" @change="onTitleChange" />
+        </el-form-item>
+        <el-form-item v-if="globalGridAttr.text" style="width: 90%;" label="text">
+          <el-input v-model="globalGridAttr.text" @change="onTextChange" />
+        </el-form-item>
+        <el-form-item v-if="globalGridAttr.text2" style="width: 90%;" label="text2">
+          <el-input v-model="globalGridAttr.text2" @change="onText2Change" />
+        </el-form-item>
+        <el-form-item v-if="globalGridAttr.text3" style="width: 90%;" label="text3">
+          <el-input v-model="globalGridAttr.text3" @change="onText3Change" />
         </el-form-item>
       </el-tab-pane>
       <el-tab-pane name="2" label="文本">
@@ -32,7 +37,6 @@
           <el-input v-model="globalGridAttr.nodeUsers" style="width: 90%;" @change="onUsersChange" />
         </el-form-item>
       </el-tab-pane>
-
     </el-tabs>
   </el-form>
 </template>
@@ -87,6 +91,22 @@ export default {
     onUsersChange(val) {
       this.globalGridAttr.nodeUsers = val
       this.curCel?.attr('approve/users', val)
+    },
+    onTitleChange(val) {
+      // this.globalGridAttr.title = val
+      this.curCel?.attr('title/text', this.globalGridAttr.title)
+    },
+    onTextChange(val) {
+      // this.globalGridAttr.title = val
+      this.curCel?.attr('text/text', this.globalGridAttr.text)
+    },
+    onText2Change(val) {
+      // this.globalGridAttr.title = val
+      this.curCel?.attr('text2/text', this.globalGridAttr.text2)
+    },
+    onText3Change(val) {
+      // this.globalGridAttr.title = val
+      this.curCel?.attr('text3/text', this.globalGridAttr.text3)
     }
   }
 

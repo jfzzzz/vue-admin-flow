@@ -1,6 +1,6 @@
 import { Graph, Addon, FunctionExt, Shape } from '@antv/x6'
 import './shape'
-import graphData from './data'
+import graphData from './opData'
 
 export default class FlowGraph {
   static init() {
@@ -148,7 +148,7 @@ export default class FlowGraph {
             columns: 1,
             marginX: 60
           },
-          graphHeight: 260
+          graphHeight: 360
         },
         {
           name: 'group',
@@ -264,6 +264,9 @@ export default class FlowGraph {
     const c3 = graph.createNode({
       shape: 'flow-chart-animate-text'
     })
+    const c4 = graph.createNode({
+      shape: 'flow-chart-combination-rect'
+    })
 
     const g1 = graph.createNode({
       shape: 'groupNode',
@@ -277,7 +280,7 @@ export default class FlowGraph {
       }
     })
     this.stencil.load([r1, r2, r3, r4], 'basic')
-    this.stencil.load([c1, c2, c3], 'combination')
+    this.stencil.load([c1, c2, c3, c4], 'combination')
     this.stencil.load([g1], 'group')
   }
 
