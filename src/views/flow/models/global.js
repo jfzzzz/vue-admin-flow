@@ -18,7 +18,7 @@ export const globalGridAttr = reactive({
 
   stroke: '#5F95FF',
   strokeWidth: 1,
-  connector: 'normal',
+  connector: 'rounded',
   label: '',
 
   nodeStroke: '#5F95FF',

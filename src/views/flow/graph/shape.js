@@ -467,11 +467,15 @@ export const FlowChartCombinationRect = Graph.registerNode('flow-chart-combinati
   height: 108,
   attrs: {
     body: {
+      rx: 10, // 圆角矩形
+      ry: 10,
       stroke: '#5F95FF',
       strokeWidth: 1,
       fill: 'rgba(95,149,255,0.05)'
     },
     head: {
+      rx: 10, // 圆角矩形
+      ry: 10,
       refWidth: '100%',
       stroke: 'transparent',
       height: 28,

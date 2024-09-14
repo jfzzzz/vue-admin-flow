@@ -26,50 +26,51 @@ export default class FlowGraph {
       },
 
       scroller: { // 滚动画布，默认禁用。
-        enabled: true,
-        pageVisible: true,
+        enabled: true, // 是否启用
+        pageVisible: true, // 是否允许页面滚动
         pageBreak: true,
         pannable: false
       },
       mousewheel: { // 鼠标滚轮缩放，默认禁用。
-        enabled: true,
-        modifiers: ['ctrl', 'meta'],
-        minScale: 0.5,
-        maxScale: 2
+        enabled: true, // 是否启用
+        modifiers: ['ctrl', 'meta'], // 鼠标滚轮缩放的快捷键
+        minScale: 0.5, // 最小缩放比例
+        maxScale: 2 // 最大缩放比例
       },
 
       selecting: { // 点选/框选，默认禁用。
-        enabled: true,
-        multiple: true,
-        rubberband: true,
-        movable: true,
-        showNodeSelectionBox: true
+        enabled: true, // 是否启用
+        multiple: true, // 是否允许多选
+        rubberband: true, // 是否允许框选
+        movable: true, // 是否允许移动
+        showNodeSelectionBox: true // 是否显示节点选择框
       },
       connecting: { // 连线选项。
-        anchor: 'center',
-        connectionPoint: 'anchor',
-        allowBlank: false,
-        highlight: true,
-        snap: true,
-        createEdge() {
+        anchor: 'center', // 	锚点类型：中心点
+        connectionPoint: 'anchor', // 	连接点类型：锚点或者箭头
+        allowBlank: false, // 	是否允许连接到空白区域
+        highlight: true, // 	是否高亮
+        snap: true, // 	是否自动对齐到节点。
+        connector: 'rounded', // 	连接器类型:圆角
+        createEdge() { // 	自定义边
           return new Shape.Edge({
-            attrs: {
-              line: {
-                stroke: '#5F95FF',
-                strokeWidth: 1,
-                targetMarker: {
-                  name: 'classic',
-                  size: 8
+            attrs: { // 	边的样式
+              line: { // 	边的样式
+                stroke: '#5F95FF', // 边颜色
+                strokeWidth: 1, // 边宽
+                targetMarker: { // 边的箭头
+                  name: 'classic', // 箭头类型
+                  size: 8 // 箭头大小
                 }
               }
             },
-            router: {
-              name: 'manhattan'
+            router: { // 	边的拐点类型
+              name: 'manhattan' // 拐点类型
             }
           })
         },
-        validateConnection({
-          sourceView,
+        validateConnection({ // 	自定义连接
+          sourceView, // 	起始节点
           targetView,
           sourceMagnet,
           targetMagnet
@@ -87,8 +88,8 @@ export default class FlowGraph {
         }
       },
       highlighting: { // 	高亮选项。
-        magnetAvailable: {
-          name: 'stroke',
+        magnetAvailable: { // 	高亮选中的锚点
+          name: 'stroke', // 	高亮选中的锚点的样式:描边
           args: {
             padding: 4,
             attrs: {
@@ -108,7 +109,7 @@ export default class FlowGraph {
       },
       embedding: { // 嵌套节点，默认禁用。
         enabled: true,
-        findParent({ node }) {
+        findParent({ node }) { // 寻找父节点
           const bbox = node.getBBox()
           return this.getNodes().filter(node => {
             // 只有 data.parent 为 true 的节点才是父节点
@@ -132,7 +133,7 @@ export default class FlowGraph {
   static initStencil() {
     this.stencil = new Addon.Stencil({
       target: this.graph,
-      stencilGraphWidth: 280,
+      stencilGraphWidth: 280, // 画布宽度
       search: { rect: true },
       collapsable: true,
       groups: [
